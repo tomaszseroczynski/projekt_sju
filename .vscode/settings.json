@@ -1,0 +1,32 @@
+{
+  "ltex.dictionary": {
+    "pl-PL": [
+      "Dummy0",
+      "Dummy1",
+      "Dummy2",
+      "Dummy3",
+      "Dummy4",
+      "Dummy5",
+      "Dummy6",
+      "Dummy7",
+      "Dummy8",
+      "Dummy9"
+    ],
+    "en-US": [
+      "Dummy0",
+      "Dummy1",
+      "Dummy2",
+      "Dummy3",
+      "Dummy4",
+      "Dummy5",
+      "Dummy6",
+      "Dummy7",
+      "Dummy8",
+      "Dummy9"
+    ]
+  },
+  "ltex.markdown.nodes": {
+    "Codeblock": "ignore",
+    "FencedCodeBlock": "ignore"
+  }
+}

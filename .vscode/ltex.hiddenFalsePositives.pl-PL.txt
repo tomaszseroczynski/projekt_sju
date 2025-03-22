@@ -1,0 +1,2 @@
+{"rule":"NIETYPOWA_KOMBINACJA_DUZYCH_I_MALYCH_LITER","sentence":"^\\QPrzygotowanie repozytorium projektu na GitHub\\E$"}
+{"rule":"NIETYPOWA_KOMBINACJA_DUZYCH_I_MALYCH_LITER","sentence":"^\\QGitHub Action\\E$"}
