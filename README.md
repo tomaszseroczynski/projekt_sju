@@ -12,7 +12,7 @@ Dalej znajdziesz instrukcje jak osiągnąć kolejne kamienie milowe.
 
 - Załóż konto na `GitHub` skojarzone z Twoim uczelnianym adresem e-mail.
 - Wykonaj **Fork** niniejszego repozytorium na Swoje konto.
-- Sprawdź, czy obraz Dockera buduje się poprawnie (czyli bez błędów):
+- Sprawdź, czy obraz Docker'a buduje się poprawnie (czyli bez błędów):
   - otwórz repozytorium w Codespaces,
   - Uruchom terminal. W terminalu wydaj komendę
     ```bash
@@ -58,7 +58,7 @@ Dalej znajdziesz instrukcje jak osiągnąć kolejne kamienie milowe.
 
 - Otwórz repozytorium w przeglądarce.
 - Dodaj akcję `Build and Publish Docker Image`. Jako rejestr obrazów wybierz `ghcr.io`. W przeciwnym razie byłoby konieczne założenie konta na Docker Hub.
-- Skonfiguruj akcję tak, aby uruchamiała się automatycznie po utworzeniu znacznika wersji (release) lub ręcznie (workflow_dispatch). W razie potrzeby skorzystaj z gotowych szablonów GitHub Actions.
+- Skonfiguruj akcję tak, aby uruchamiała się automatycznie po utworzeniu znacznika wersji (`release`) lub ręcznie (`workflow_dispatch`). W razie potrzeby skorzystaj z gotowych szablonów GitHub Actions.
 - Doprowadź do sytuacji, w której wszystko przebiega bezbłędnie.
 - Dodaj do akcji test sprawdzający poprawność zbudowanego obrazu:
 
@@ -108,10 +108,12 @@ Dalej znajdziesz instrukcje jak osiągnąć kolejne kamienie milowe.
       - name: Log into registry ${{ env.REGISTRY }}
     ```
 
-- Ponownie uruchom akcję i w logach sprawdź czy sprawdzenie przebiegło poprawnie.
+- Ponownie uruchom akcję i w logach sprawdź, czy sprawdzenie przebiegło poprawnie.
 - W pliku `.devcontainer/devcontainer.json` zmień wpis `image:` na taki, który wskazuje nowo zbudowany obraz w rejestrze `GitHub`.
 
-### Notka nt. `GitHub Action` UI
+### Notka nt. interfejsu użytkownika `GitHub Action`
+
+<!-- LTeX: language=en-US -->
 
 When **at least one workflow already exists** in `.github/workflows/`, GitHub **hides the “template gallery”** on the **Actions** tab.
 
@@ -150,6 +152,8 @@ From there, you can:
 
 - Browse templates for CI, Docker, Python, etc.
 - Copy-paste the full YAML file into your own `.github/workflows/` folder.
+
+<!-- LTeX: language=pl-PL -->
 
 ## 5. Praca z repozytorium w kontenerze developerskim
 
@@ -229,18 +233,16 @@ Kolumna 2
 - Korzystając z szablonu, utwórz prezentację zawierającą:
   - wypunktowane kroki prowadzące do skutecznej realizacji każdego etapu,
   - szczegóły konfiguracji `Dockerfile`, `GitHub Actions` oraz `devcontainer`,
-  - Wstaw diagram Mermaid, np. diagram zależności lub przepływu pracy, używając składni Markdown zgodnej z marp. W razie trudności skorzystaj z [Mermaid Live Editor](https://mermaid.live).
-  - Dodaj slajd z krótkim podsumowaniem, co było najtrudniejsze, czego się nauczył(aś/eś), co byś zmienił(a/-) w konfiguracji. Opcjonalnie: napisz, jak można by rozbudować środowisko, aby poprawić jego walor dydaktyczny.
+  - Wstaw diagram Mermaid, np. diagram zależności lub przepływu pracy, używając składni Markdown zgodnej z MARP. W razie trudności skorzystaj z [Mermaid Live Editor](https://mermaid.live).
+  - Dodaj slajd z krótkim podsumowaniem, co było najtrudniejsze, czego się nauczyłeś (-aś), co byś zmienił (-a) w konfiguracji. Opcjonalnie: napisz, jak można by rozbudować środowisko, aby poprawić jego walor dydaktyczny.
 - Upewnij się, że raport jest przejrzysty i zawiera wszystkie istotne informacje dotyczące projektu.
-
----
 
 ## 7. Publikacja Raportu
 
 - Wyeksportuj prezentację do pliku HTML.
 - W ustawieniach repozytorium aktywuj `GitHub Pages`. Jako metodę publikacji wybierz `GitHub Actions` i wybierz akcję `Static HTML`. Jako publikowany katalog wskaż `doc`. Aktywuj akcję. Sprawdź, czy strona jest dostępna.
 - Jeżeli tak, wyeksportuj prezentację to pliku PDF.
-- Wykonaj `git rebase` na gałęzi `main`, aby zlinearyzować zmiany w głównej gałęzi repozytorium. Upewnij się, że nie występują konflikty. Wykonaj `Rebase` na gałęzi `main` repozytorium. Wgraj plik prezentacji na PZE. W adnotacji podaj link do opublikowanej prezentacji.
+- Wykonaj `git rebase` na gałęzi `main`, aby zlinearyzować historię zmian w głównej gałęzi repozytorium. Upewnij się, że nie występują konflikty. Wykonaj `Rebase` na gałęzi `main` repozytorium. Wgraj plik prezentacji na PZE. W adnotacji podaj link do opublikowanej prezentacji.
 
 <!-- LTeX: language=en-US -->
 

@@ -32,3 +32,9 @@ Dummy37
 Dummy38
 Dummy39
 Action
+Actions
+MARP
+Mermaid
+Editor
+aś
+zlinearyzować
