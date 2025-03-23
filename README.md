@@ -60,7 +60,96 @@ Dalej znajdziesz instrukcje jak osiągnąć kolejne kamienie milowe.
 - Dodaj akcję `Build and Publish Docker Image`. Jako rejestr obrazów wybierz `ghcr.io`. W przeciwnym razie byłoby konieczne założenie konta na Docker Hub.
 - Skonfiguruj akcję tak, aby uruchamiała się automatycznie po utworzeniu znacznika wersji (release) lub ręcznie (workflow_dispatch). W razie potrzeby skorzystaj z gotowych szablonów GitHub Actions.
 - Doprowadź do sytuacji, w której wszystko przebiega bezbłędnie.
+- Dodaj do akcji test sprawdzający poprawność zbudowanego obrazu:
+
+  - w katalogu głównym repozytorium utwórz plik `test.py` o treści
+
+    ```python
+    def test_imports():
+    packages = [
+        "qiskit",
+        "matplotlib",
+        "PIL",  # Pillow
+        "Cryptodome",  # Pycryptodomex
+        "cryptography"
+    ]
+
+    for pkg in packages:
+        try:
+            __import__(pkg)
+            print(f"✅ {pkg} - OK")
+        except ImportError:
+            print(f"❌ {pkg} - MISSING")
+            exit(1)
+
+    if __name__ == "__main__":
+        test_imports()
+    ```
+
+  - W pliku akcji w miejscu po przygotowaniu środowiska budowania a przed jego wysłaniem do rejestru dodaj fragment
+
+    ```yml
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v3
+      # początek testu
+      - name: Build Docker image
+        run: docker build -t sjuprojekt .
+
+      - name: Run test script inside container
+        run: |
+          docker run --rm sjuprojekt python /home/vscode/workspace/test.py
+          - name: Build Docker image
+        run: docker build -t sjuprojekt .
+
+      - name: Run test script inside container
+        run: |
+          docker run --rm sjuprojekt python /home/vscode/workspace/test.py
+      # koniec testu
+      - name: Log into registry ${{ env.REGISTRY }}
+    ```
+
+- Ponownie uruchom akcję i w logach sprawdź czy sprawdzenie przebiegło poprawnie.
 - W pliku `.devcontainer/devcontainer.json` zmień wpis `image:` na taki, który wskazuje nowo zbudowany obraz w rejestrze `GitHub`.
+
+### Notka nt. `GitHub Action` UI
+
+When **at least one workflow already exists** in `.github/workflows/`, GitHub **hides the “template gallery”** on the **Actions** tab.
+
+But no worries — here are **3 alternative ways** to access and use GitHub’s official Action templates, even when one is already defined:
+
+#### ✅ Option 1: Manually add a new workflow file
+
+1. Go to your repo's `Code` tab.
+2. Navigate to `.github/workflows/`.
+3. Click **“Add file” → “Create new file”**.
+4. Name it, e.g., `docker-publish.yml`.
+5. Paste a template from the [GitHub Actions starter workflows library](https://github.com/actions/starter-workflows).
+6. Commit the new file.
+
+💡 _Starter workflows for Docker:_
+
+- https://github.com/actions/starter-workflows/blob/main/ci/docker-publish.yml
+
+#### ✅ Option 2: Use "New workflow" link directly
+
+Even if the tab hides the gallery, you can **force it** to show the template UI by navigating here manually:
+
+👉 **`https://github.com/<user>/<repo>/actions/new`**
+
+> Replace `<user>` and `<repo>` with your GitHub username and repository name.
+
+This takes you to the **template selection view**, regardless of existing workflows.
+
+#### ✅ Option 3: Copy from GitHub's template repository
+
+GitHub maintains an open-source repo with dozens of ready-to-use action templates:
+
+🔗 [https://github.com/actions/starter-workflows](https://github.com/actions/starter-workflows)
+
+From there, you can:
+
+- Browse templates for CI, Docker, Python, etc.
+- Copy-paste the full YAML file into your own `.github/workflows/` folder.
 
 ## 5. Praca z repozytorium w kontenerze developerskim
 
@@ -151,7 +240,7 @@ Kolumna 2
 - Wyeksportuj prezentację do pliku HTML.
 - W ustawieniach repozytorium aktywuj `GitHub Pages`. Jako metodę publikacji wybierz `GitHub Actions` i wybierz akcję `Static HTML`. Jako publikowany katalog wskaż `doc`. Aktywuj akcję. Sprawdź, czy strona jest dostępna.
 - Jeżeli tak, wyeksportuj prezentację to pliku PDF.
-- Wykonaj `git rebase` na gałęzi `main`, aby zlinearyzować zmiany w głównej gałęzi repozytorium. Upewnij się, że nie występują konflikty.Wykonaj `Rebase` na gałęzi `main` repozytorium. Wgraj plik prezentacji na PZE. W adnotacji podaj link do opublikowanej prezentacji.
+- Wykonaj `git rebase` na gałęzi `main`, aby zlinearyzować zmiany w głównej gałęzi repozytorium. Upewnij się, że nie występują konflikty. Wykonaj `Rebase` na gałęzi `main` repozytorium. Wgraj plik prezentacji na PZE. W adnotacji podaj link do opublikowanej prezentacji.
 
 <!-- LTeX: language=en-US -->
 
