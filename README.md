@@ -12,7 +12,7 @@ Dalej znajdziesz instrukcje jak osiągnąć kolejne kamienie milowe.
 
 - Załóż konto na `GitHub` skojarzone z Twoim uczelnianym adresem e-mail.
 - Wykonaj **Fork** niniejszego repozytorium na Swoje konto.
-- Sprawdź, czy obraz Docker'a się poprawnie buduje:
+- Sprawdź, czy obraz Dockera buduje się poprawnie (czyli bez błędów):
   - otwórz repozytorium w Codespaces,
   - Uruchom terminal. W terminalu wydaj komendę
     ```bash
@@ -22,13 +22,13 @@ Dalej znajdziesz instrukcje jak osiągnąć kolejne kamienie milowe.
     ```bash
     docker run -it --rm -v .:/home/vscode/workspace sjuprojekt bash
     ```
-    Sprawdź komendą `ls /workspace`, czy widoczne są pliki projektu.
+    Sprawdź komendą `ls /home/vscode/workspace`, czy widoczne są pliki projektu.
 - Jeżeli budowanie zakończyło się sukcesem, możesz przystąpić realizacji następnego etapu.
 
 ## 2. Modyfikacja Dockerfile
 
 - W Codespace zainstaluj rozszerzenie Docker, która znacznie ułatwia pracę z plikami konfiguracyjnymi Docker'a oraz umożliwia zarządzanie obrazami i kontenerami.
-- Zmodyfikuj plik `Dockerfile`, tak aby w obrazie znalazły się `Qiskit`, `Matplotlib`, `Pillow`, `Pycryptodomex`, `Cryptography`.
+- Zmodyfikuj plik `Dockerfile`, aby zawierał instalację pakietów: `Qiskit`, `Matplotlib`, `Pillow`, `Pycryptodomex`, `Cryptography`. Możesz użyć polecenia `pip install` w odpowiedniej sekcji `Dockerfile`.
 - Ponownie zbuduj obraz. Możesz przejść do następnego punktu, gdy obraz buduje się poprawnie.
 
 ## 3. Kontener developerski
@@ -50,15 +50,15 @@ Dalej znajdziesz instrukcje jak osiągnąć kolejne kamienie milowe.
   }
   ```
 - Otwórz repozytorium w kontenerze developerskim: `Ctrl+Shift+P` i wpisz `devcontainer`.
-- Otwórz rozszerzenia i dodaj następujące do kontenera: `Markdown All in One`, `Marp for VS Code`, `GitHub Actions`.
+- Otwórz rozszerzenia i dodaj następujące rozszerzenia do kontenera: `Markdown All in One`, `Marp for VS Code`, `GitHub Actions`.
 - Wybierz `Rebuild Container`.
 - Jeżeli kontener zbudował się poprawnie, możesz wypchnąć wszystkie modyfikacje do repozytorium i zakończyć pracę z Codespaces. Nie zapomnij zatrzymać i ewentualnie skasować wirtualnej maszyny w chmurze.
 
 ## 4. GitHub Action
 
 - Otwórz repozytorium w przeglądarce.
-- Dodaj akcję `Build and Publish Docker Image`. Jako rejestr obrazów wybierz `ghcr.io`. W przeciwnym razie będzie konieczne założenie konta na Docker Hub.
-- Akcje powinna się aktywować po nadaniu archiwum znacznika wersji lub na żądanie.
+- Dodaj akcję `Build and Publish Docker Image`. Jako rejestr obrazów wybierz `ghcr.io`. W przeciwnym razie byłoby konieczne założenie konta na Docker Hub.
+- Skonfiguruj akcję tak, aby uruchamiała się automatycznie po utworzeniu znacznika wersji (release) lub ręcznie (workflow_dispatch). W razie potrzeby skorzystaj z gotowych szablonów GitHub Actions.
 - Doprowadź do sytuacji, w której wszystko przebiega bezbłędnie.
 - W pliku `.devcontainer/devcontainer.json` zmień wpis `image:` na taki, który wskazuje nowo zbudowany obraz w rejestrze `GitHub`.
 
@@ -136,21 +136,22 @@ Kolumna 2
 </div>
 ```
 
-- Utwórz w repozytorium podkatalog `doc`
-- Korzystając z szablonu utwórz prezentację zawierającą:
-  - Wypunktowane kroki prowadzące do skutecznej realizacji każdego etapu.
-  - Szczegóły konfiguracji Dockerfile, `GitHub Actions` oraz `devcontainer`.
-  - Spróbuj wstawić diagram `Mermaid` obrazujący przepływ realizacji projektu (np. schemat kroków lub diagram zależności).
+- W repozytorium utwórz podkatalog `doc`.
+- Korzystając z szablonu, utwórz prezentację zawierającą:
+  - wypunktowane kroki prowadzące do skutecznej realizacji każdego etapu,
+  - szczegóły konfiguracji `Dockerfile`, `GitHub Actions` oraz `devcontainer`,
+  - Wstaw diagram Mermaid, np. diagram zależności lub przepływu pracy, używając składni Markdown zgodnej z marp. W razie trudności skorzystaj z [Mermaid Live Editor](https://mermaid.live).
+  - Dodaj slajd z krótkim podsumowaniem, co było najtrudniejsze, czego się nauczył(aś/eś), co byś zmienił(a/-) w konfiguracji. Opcjonalnie: napisz, jak można by rozbudować środowisko, aby poprawić jego walor dydaktyczny.
 - Upewnij się, że raport jest przejrzysty i zawiera wszystkie istotne informacje dotyczące projektu.
 
 ---
 
 ## 7. Publikacja Raportu
 
-- Wyeksportuj prezentację do pliku HTML
+- Wyeksportuj prezentację do pliku HTML.
 - W ustawieniach repozytorium aktywuj `GitHub Pages`. Jako metodę publikacji wybierz `GitHub Actions` i wybierz akcję `Static HTML`. Jako publikowany katalog wskaż `doc`. Aktywuj akcję. Sprawdź, czy strona jest dostępna.
 - Jeżeli tak, wyeksportuj prezentację to pliku PDF.
-- Wykonaj `Rebase` na gałęzi `main` repozytorium. Wgraj plik prezentacji na PZE. W adnotacji podaj link do opublikowanej prezentacji.
+- Wykonaj `git rebase` na gałęzi `main`, aby zlinearyzować zmiany w głównej gałęzi repozytorium. Upewnij się, że nie występują konflikty.Wykonaj `Rebase` na gałęzi `main` repozytorium. Wgraj plik prezentacji na PZE. W adnotacji podaj link do opublikowanej prezentacji.
 
 <!-- LTeX: language=en-US -->
 

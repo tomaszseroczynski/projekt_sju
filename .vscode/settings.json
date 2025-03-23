@@ -28,5 +28,6 @@
   "ltex.markdown.nodes": {
     "Codeblock": "ignore",
     "FencedCodeBlock": "ignore"
-  }
+  },
+  "markdown.marp.pdf.outlines": "headings"
 }
